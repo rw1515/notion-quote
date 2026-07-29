@@ -191,6 +191,7 @@
                     if (response.ok) {
                         quote_text.textContent = data.quote;
                         cite.textContent = data.author;
+                        fitText();
                     } else {
                         quote_text.textContent = "An error occured";
                         console.log(data);
@@ -208,6 +209,7 @@
                     random_quote = data[Math.floor(Math.random() * data.length - 1) + 1];
                     quote_text.textContent = random_quote.content;
                     cite.textContent = random_quote.author;
+                    fitText();
                 } else {
                     quote_text.textContent = "An error occured";
                     console.log(data);
@@ -244,6 +246,15 @@
             function setSize(value) {
                 quote.style.fontSize = value + 'rem';
                 localStorage.setItem('size', value);
+            }
+            
+            function fitText() {
+    let fontSize = 1.5;
+    quote.style.fontSize = fontSize + 'rem';
+    while (document.body.scrollHeight > window.innerHeight && fontSize > 0.7) {
+        fontSize -= 0.05;
+        quote.style.fontSize = fontSize + 'rem';
+                }
             }
 
             function loadQuote() {
